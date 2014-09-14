@@ -38,16 +38,18 @@
 	<main>
     <p>Mongoose 3.9.2+ allow us bundle it by browserify. This make us a new way to share model between server/client side.</p>
     <p>This plugin is very young. Mongoose 3.9.x is unstable version. Just play it. Don't use for production.</p>
+
+		<div id='demo' class='clearfix'></div>
+    
 		<p>You can play with person variable on your browser console.</p>
-    <pre>
+    <pre class='prettyprint lang-js'>
       person.name.first = 'Lee'
       person.fullname = 'John White'
       person.age = 20
       person.errors = null // I'm working for fix this issue.
       person.validate()
     </pre>
-
-		<div id='demo' class='clearfix'></div>
+    
 
 		<pre id='demo-template-view' class='prettyprint lang-html'></pre>
 		<pre id='demo-code-view' class='prettyprint lang-js'></pre>
