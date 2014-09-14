@@ -1,0 +1,16 @@
+{
+    "dependencies": {
+        "ractivejs/ractive": "^0.5.7"
+    },
+    "description": "ractive-adaptors-mongoose",
+    "development": {},
+    "keywords": [],
+    "license": "MIT",
+    "main": "ractive-adaptors-mongoose.js",
+    "name": "ractive-adaptors-mongoose",
+    "repo": "git://github.com/cncolder/ractive-adaptors-mongoose.git",
+    "scripts": [
+        "ractive-adaptors-mongoose.js"
+    ],
+    "version": "0.1.0"
+}

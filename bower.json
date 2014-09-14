@@ -1,0 +1,22 @@
+{
+    "author": "colder",
+    "dependencies": {
+        "ractive": "^0.5.7"
+    },
+    "ignore": [
+        ".*",
+        "*.json",
+        "demo",
+        "grunt",
+        "node_modules",
+        "src",
+        "test",
+        "plugin-template",
+        "Gruntfile.js",
+        "index.html",
+        "README.md"
+    ],
+    "main": "ractive-adaptors-mongoose.js",
+    "name": "ractive-adaptors-mongoose",
+    "version": "0.1.0"
+}
