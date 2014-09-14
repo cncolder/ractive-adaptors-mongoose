@@ -7,12 +7,10 @@
         ".*",
         "*.json",
         "demo",
-        "grunt",
         "node_modules",
         "src",
         "test",
-        "plugin-template",
-        "Gruntfile.js",
+        "gulpfile.js",
         "index.html",
         "README.md"
     ],
