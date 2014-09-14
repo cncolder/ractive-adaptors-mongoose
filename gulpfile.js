@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
@@ -25,7 +26,9 @@ gulp.task('js', function() {
 gulp.task('browserify:mongoose', function() {
   return browserify('./node_modules/mongoose/lib/browser.js')
     .bundle()
-    .pipe(source('mongoose.js'))
+    .pipe(source('mongoose.min.js'))
+    .pipe(buffer())
+    .pipe(uglify())
     .pipe(gulp.dest('demo'));
 });
 
