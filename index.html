@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang='en-GB'>
+<head>
+	<meta charset='utf-8'>
+	<title>Ractive.js ractive-adaptors-mongoose adaptor plugin</title>
+
+	<!-- CSS -->
+	<link href='http://fonts.googleapis.com/css?family=Voltaire' rel='stylesheet' type='text/css'>
+	<link rel='stylesheet' href='demo/main.css'>
+
+	<!-- TODO add styles specific to this demo -->
+	<style type='text/css'>
+
+	</style>
+</head>
+
+<body>
+
+	<!-- if the project is on GitHub, add a fork me button! -->
+	<!-- <a class='forkme' href='https://github.com/you/repo'>Fork me on GitHub</a> -->
+
+	<header>
+		<h1>Ractive.js ractive-adaptors-mongoose adaptor plugin</h1>
+		<p class='strap'>
+			<span class='download'>
+        download: <a href='https://github.com/cncolder/ractive-adaptors-mongoose/raw/master/ractive-adaptors-mongoose.js'>
+          ractive-adaptors-mongoose.js
+        </a>
+        or
+        <a href='https://github.com/cncolder/ractive-adaptors-mongoose/raw/master/ractive-adaptors-mongoose.min.js'>
+          .min.js
+        </a>
+      </span>
+			<span class='more-plugins'>more plugins at <a href='http://docs.ractivejs.org/latest/plugins'>docs.ractivejs.org/latest/plugins</a></span>
+		</p>
+	</header>
+
+	<main>
+    <p>Mongoose 3.9.2+ allow us bundle it by browserify. This make us a new way to share model between server/client side.</p>
+    <p>This plugin is very young. Mongoose 3.9.x is unstable version. Just play it. Don't use for production.</p>
+		<p>You can play with person variable on your browser console.</p>
+    <pre>
+      person.name.first = 'Lee'
+      person.fullname = 'John White'
+      person.age = 20
+      person.errors = null // I'm working for fix this issue.
+      person.validate()
+    </pre>
+
+		<div id='demo' class='clearfix'></div>
+
+		<pre id='demo-template-view' class='prettyprint lang-html'></pre>
+		<pre id='demo-code-view' class='prettyprint lang-js'></pre>
+	</main>
+
+	<!-- add additional info such as your homepage here, if you want -->
+	<footer>
+		<p>Copyright &copy; 2014 colder. Licensed MIT</p>
+	</footer>
+
+	<!-- Demo template -->
+	<script id='demo-template' type='text/ractive'>
+		<p>My name is {{ fullname }}</p>
+    <p>My first name is {{ name.first }}</p>
+    <p>My last name is {{ name.last }}</p>
+    <p>I have {{ age }} years old</p>
+    <p>Really? {{ errors.age.message }}</p>
+	</script>
+
+	<!-- Dependencies -->
+	<script src='node_modules/ractive/ractive.js'></script>
+  <script src='demo/mongoose.js'></script>
+	<script src='ractive-adaptors-mongoose.js'></script>
+
+	<!-- Demo code -->
+	<script id='demo-code'>
+    schema = new mongoose.Schema({
+      name: {
+        first: String,
+        last: String
+      },
+      age: {
+        type: Number,
+        min: 1
+      }
+    });
+    
+    schema.virtual('fullname')
+      .get(function() {
+        return this.name.first + ' ' + this.name.last;
+      })
+      .set(function(v) {
+        var parts = v.split(' ');
+        this.name.first = parts[0];
+        this.name.last = parts[1];
+      });
+    
+    person = new mongoose.Document({
+      name: {
+        first: 'Jim',
+        last: 'Green'
+      },
+      age: -1
+    }, schema);
+    
+		ractive = new Ractive({
+			el: 'demo',
+			template: '#demo-template',
+      adapt: ['mongoose'],
+      data: person
+		});
+    
+    person.validate();
+	</script>
+
+	<!-- Insert code into the page -->
+	<script src='demo/prettify.js'></script>
+	<script src='demo/demo.js'></script>
+</body>
+</html>
