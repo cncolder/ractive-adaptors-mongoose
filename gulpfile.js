@@ -26,9 +26,7 @@ gulp.task('js', function() {
 gulp.task('browserify:mongoose', function() {
   return browserify('./node_modules/mongoose/lib/browser.js')
     .bundle()
-    .pipe(source('mongoose.min.js'))
-    .pipe(buffer())
-    .pipe(uglify())
+    .pipe(source('mongoose.js'))
     .pipe(gulp.dest('demo'));
 });
 
