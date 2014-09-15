@@ -67,11 +67,12 @@
     <p>My last name is {{ name.last }}</p>
     <p>I have {{ age }} years old</p>
     <p>Really? {{ errors.age.message }}</p>
+    <p>My coins: {{ coin }}++</p>
 	</script>
 
 	<!-- Dependencies -->
 	<script src='demo/ractive.min.js'></script>
-  <script src='demo/mongoose.js'></script>
+  <script src='demo/mongoose.min.js'></script>
 	<script src='ractive-adaptors-mongoose.js'></script>
 
 	<!-- Demo code -->
@@ -84,7 +85,8 @@
       age: {
         type: Number,
         min: 1
-      }
+      },
+      coin: Number
     });
     
     schema.virtual('fullname')
@@ -102,7 +104,8 @@
         first: 'Jim',
         last: 'Green'
       },
-      age: -1
+      age: -1,
+      coin: 0
     }, schema);
     
 		ractive = new Ractive({
@@ -113,6 +116,10 @@
 		});
     
     person.validate();
+    
+    setInterval(function () {
+      person.coin += 1;
+    }, 500);
 	</script>
 
 	<!-- Insert code into the page -->

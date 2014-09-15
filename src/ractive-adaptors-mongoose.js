@@ -57,16 +57,22 @@
     },
 
     wrap: function(ractive, doc, keypath, prefix) {
-      doc.on('validate', this.validateHandler = function(doc) {
+      var validateHandler = function(doc) {
         ractive.set(prefix({
           errors: doc.errors
         }));
-      });
+      };
+
+      doc.on('validate', validateHandler);
+
+      // nether post set nor ractive set.
+      var settle = {};
 
       doc.post('set', function(next, property, value) {
-        if (this.settle && this.settle[property]) {
-          delete this.settle[property];
+        if (settle[property]) {
+          delete settle[property];
         } else {
+          settle[property] = true;
           var obj = {};
           obj[property] = value;
           ractive.set(prefix(obj));
@@ -76,7 +82,7 @@
 
       return {
         teardown: function() {
-          this.value.removeListener('validate', this.validateHandler);
+          this.value.removeListener('validate', validateHandler);
           // TODO remove post set hooks.
         },
 
@@ -85,22 +91,21 @@
         },
 
         set: function(property, value) {
-          // mongoose cast value. so !=
-          if (this.value[property] != value) {
-            this.settle = this.settle || {};
-            this.settle[property] = value;
+          if (settle[property]) {
+            delete settle[property];
+          } else if (this.value[property] != value) {
+            settle[property] = true;
             // if schema setter change other field. this may raise another set.
             this.value[property] = value;
           }
         },
 
         reset: function(data) {
-          debug('reset', data);
           if (typeof data !== 'object' || data instanceof mongoose.Document) {
             return false;
           }
 
-          this.value.set(data);
+          // this.value.set(data);
           this.value.$__reset();
           // TODO maybe ractive will set value and make doc dirty again.
         }
