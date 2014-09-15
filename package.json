@@ -2,9 +2,7 @@
     "author": {
         "name": "colder"
     },
-    "dependencies": {
-        "ractive": "^0.5.7"
-    },
+    "dependencies": {},
     "description": "ractive-adaptors-mongoose plugin for Ractive.js",
     "devDependencies": {
         "browserify": "^5.11.2",
@@ -14,6 +12,7 @@
         "gulp-uglify": "^1.0.1",
         "mocha": "^1.21.4",
         "mongoose": "^3.9.2",
+        "ractive": "^0.5.7",
         "vinyl-buffer": "^1.0.0",
         "vinyl-source-stream": "^1.0.0"
     },

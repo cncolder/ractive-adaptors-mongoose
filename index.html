@@ -38,16 +38,18 @@
 	<main>
     <p>Mongoose 3.9.2+ allow us bundle it by browserify. This make us a new way to share model between server/client side.</p>
     <p>This plugin is very young. Mongoose 3.9.x is unstable version. Just play it. Don't use for production.</p>
+
+		<div id='demo' class='clearfix'></div>
+    
 		<p>You can play with person variable on your browser console.</p>
-    <pre>
+    <pre class='prettyprint lang-js'>
       person.name.first = 'Lee'
       person.fullname = 'John White'
       person.age = 20
       person.errors = null // I'm working for fix this issue.
       person.validate()
     </pre>
-
-		<div id='demo' class='clearfix'></div>
+    
 
 		<pre id='demo-template-view' class='prettyprint lang-html'></pre>
 		<pre id='demo-code-view' class='prettyprint lang-js'></pre>
@@ -65,11 +67,12 @@
     <p>My last name is {{ name.last }}</p>
     <p>I have {{ age }} years old</p>
     <p>Really? {{ errors.age.message }}</p>
+    <p>My coins: {{ coin }}++</p>
 	</script>
 
 	<!-- Dependencies -->
 	<script src='demo/ractive.min.js'></script>
-  <script src='demo/mongoose.js'></script>
+  <script src='demo/mongoose.min.js'></script>
 	<script src='ractive-adaptors-mongoose.js'></script>
 
 	<!-- Demo code -->
@@ -82,7 +85,8 @@
       age: {
         type: Number,
         min: 1
-      }
+      },
+      coin: Number
     });
     
     schema.virtual('fullname')
@@ -100,7 +104,8 @@
         first: 'Jim',
         last: 'Green'
       },
-      age: -1
+      age: -1,
+      coin: 0
     }, schema);
     
 		ractive = new Ractive({
@@ -111,6 +116,10 @@
 		});
     
     person.validate();
+    
+    setInterval(function () {
+      person.coin += 1;
+    }, 500);
 	</script>
 
 	<!-- Insert code into the page -->

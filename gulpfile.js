@@ -26,7 +26,11 @@ gulp.task('js', function() {
 gulp.task('browserify:mongoose', function() {
   return browserify('./node_modules/mongoose/lib/browser.js')
     .bundle()
-    .pipe(source('mongoose.js'))
+    .pipe(source('mongoose.min.js'))
+    .pipe(buffer())
+    .pipe(uglify({
+      mangle: false // for mongoose function name.
+    }))
     .pipe(gulp.dest('demo'));
 });
 
