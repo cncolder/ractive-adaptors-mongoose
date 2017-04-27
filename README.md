@@ -1,5 +1,7 @@
 # Ractive.js ractive-adaptors-mongoose adaptor plugin
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/cncolder/ractive-adaptors-mongoose.svg)](https://greenkeeper.io/)
+
 *Find more Ractive.js plugins at [docs.ractivejs.org/latest/plugins](http://docs.ractivejs.org/latest/plugins)*
 
 [See the demo here.](http://cncolder.github.io/ractive-adaptors-mongoose)
